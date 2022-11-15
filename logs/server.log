@@ -1,0 +1,342 @@
+2022-11-14 21:01:40.345	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 21:01:40.346	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-14 21:01:40.346	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-14 21:02:12.552	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.505ms] [rows:-] SELECT DATABASE()
+2022-11-14 21:02:12.564	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][11.646ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 21:02:12.581	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][16.732ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-14 21:02:12.690	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:255][108.793ms] [rows:0] CREATE TABLE `user` (`id` bigint unsigned AUTO_INCREMENT,`username` longtext NOT NULL,`password` longtext NOT NULL,`email` longtext,`role` bigint,`gender` longtext,`major` longtext,`createdAt` datetime(3) NULL,`updatedAt` datetime(3) NULL,`deletedAt` datetime(3) NULL,PRIMARY KEY (`id`),INDEX `idx_deletedAt` (`deletedAt`))
+2022-11-14 21:02:12.694	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-14 21:02:13.201	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-14 21:04:13.440	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 21:04:13.441	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-14 21:04:13.442	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-14 21:04:33.876	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.037ms] [rows:-] SELECT DATABASE()
+2022-11-14 21:04:33.879	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][2.316ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 21:04:33.880	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][0.931ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-14 21:04:33.881	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-14 21:04:33.881	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.783ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 21:04:33.887	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][4.546ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-14 21:04:33.888	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][1.597ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-14 21:04:33.941	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][52.267ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `id` bigint unsigned AUTO_INCREMENT
+2022-11-14 21:04:33.980	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][38.571ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `username` longtext NOT NULL
+2022-11-14 21:04:34.014	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][33.444ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `password` longtext NOT NULL
+2022-11-14 21:04:34.045	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][30.763ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `email` longtext
+2022-11-14 21:04:34.086	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][39.655ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `role` bigint
+2022-11-14 21:04:34.128	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][40.873ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `gender` longtext
+2022-11-14 21:04:34.167	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][39.366ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `major` longtext
+2022-11-14 21:04:34.186	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:328][17.514ms] [rows:0] ALTER TABLE `user` ADD `createdAt` datetime(3) NULL
+2022-11-14 21:04:34.204	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:328][16.925ms] [rows:0] ALTER TABLE `user` ADD `updatedAt` datetime(3) NULL
+2022-11-14 21:04:34.218	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:328][14.512ms] [rows:0] ALTER TABLE `user` ADD `deletedAt` datetime(3) NULL
+2022-11-14 21:04:34.220	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.508ms] [rows:-] SELECT DATABASE()
+2022-11-14 21:04:34.220	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.570ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 21:04:34.222	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][1.032ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-14 21:04:34.243	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:720][19.514ms] [rows:0] CREATE INDEX `idx_deletedAt` ON `user`(`deletedAt`)
+2022-11-14 21:04:34.247	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-14 21:04:34.752	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-14 21:06:46.495	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 21:06:46.496	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-14 21:06:46.497	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-14 21:07:05.242	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.627ms] [rows:-] SELECT DATABASE()
+2022-11-14 21:07:05.249	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][5.657ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 21:07:05.250	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][1.884ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-14 21:07:05.298	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:255][46.690ms] [rows:0] CREATE TABLE `user` (`id` bigint unsigned AUTO_INCREMENT,`username` longtext NOT NULL,`password` longtext NOT NULL,`email` longtext,`role` bigint,`gender` longtext,`major` longtext,`createdAt` datetime(3) NULL,`updatedAt` datetime(3) NULL,`deletedAt` datetime(3) NULL,PRIMARY KEY (`id`),INDEX `idx_deletedAt` (`deletedAt`))
+2022-11-14 21:07:05.302	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-14 21:07:05.808	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-14 22:14:50.608	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 22:14:50.629	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-14 22:14:50.631	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-14 22:25:53.727	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][1.528ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:25:53.782	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][52.780ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:25:53.801	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][18.424ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-14 22:25:53.801	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.511ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:25:53.802	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.688ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:25:53.812	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][9.590ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-14 22:25:53.822	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][9.418ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-14 22:25:53.968	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][143.538ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `email` varchar(100)
+2022-11-14 22:25:54.047	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][78.288ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `role` smallint
+2022-11-14 22:25:54.047	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.508ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:25:54.049	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.614ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:25:54.051	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.197ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-14 22:25:54.056	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-14 22:25:54.571	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-14 22:28:39.635	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 22:28:39.636	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-14 22:28:39.636	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-14 22:28:46.427	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.516ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:28:46.434	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][6.325ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:28:46.437	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][2.262ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-14 22:28:46.437	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.513ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:28:46.439	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][1.820ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:28:46.440	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][0.507ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-14 22:28:46.444	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][3.215ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-14 22:28:46.551	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][105.991ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `username` varchar(32) NOT NULL
+2022-11-14 22:28:46.630	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][77.508ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `password` varchar(128) NOT NULL
+2022-11-14 22:28:46.692	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:52][61.005ms] [rows:0] ALTER TABLE `user` MODIFY COLUMN `gender` varchar(10)
+2022-11-14 22:28:46.693	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.507ms] [rows:-] SELECT DATABASE()
+2022-11-14 22:28:46.695	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.680ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-14 22:28:46.697	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][1.899ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-14 22:28:46.702	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-14 22:28:47.209	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-14 23:24:45.471	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-14 23:24:45.485	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-14 23:24:45.488	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 16:06:36.735	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.535ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:06:36.754	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][17.587ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:06:36.760	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][5.465ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 16:06:36.764	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.512ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:06:36.766	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][1.207ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:06:36.767	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][0.512ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 16:06:36.780	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][9.245ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 16:06:36.781	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:06:36.783	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.495ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:06:36.786	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.530ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 16:06:36.790	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 16:06:37.296	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 16:08:06.300	[34mINFO[0m	server	user/register.go:22	user create function called.	{"requestID": "fc726134-8828-4407-8ca0-677cc4df8b18", "username": ""}
+2022-11-15 16:08:06.423	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:19][29.628ms] [rows:1] INSERT INTO `user` (`username`,`password`,`email`,`role`,`gender`,`createdAt`,`updatedAt`,`deletedAt`,`id`) VALUES ('fy','$2a$10$tV5H6wO2OVx7KQzx5J7xye16j7xKMiQWWuyAjljKZP9wAzBD7eZkC','email@qq.com',1,'','2022-11-15 16:08:06.401','2022-11-15 16:08:06.401',NULL,134)
+2022-11-15 16:09:58.360	[34mINFO[0m	server	middleware/logging.go:90	1.9878ms      | ::1          | POST /login | {code: 20105, message: Password was incorrect.}
+2022-11-15 16:10:26.369	[34mINFO[0m	server	middleware/logging.go:90	0s            | ::1          | POST /login | {code: 20105, message: Password was incorrect.}
+2022-11-15 16:13:26.752	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 16:13:26.754	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 16:13:26.754	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 16:13:31.317	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.188ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:13:31.357	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][38.630ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:13:31.381	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][23.239ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 16:13:31.382	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.507ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:13:31.384	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.695ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:13:31.385	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][0.548ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 16:13:31.396	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][10.423ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 16:13:31.397	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.030ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:13:31.398	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.868ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:13:31.402	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][3.573ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 16:13:31.406	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 16:13:31.923	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 16:13:39.263	[34mINFO[0m	server	middleware/logging.go:90	563.7µs       | ::1          | POST /login | {code: 20105, message: Password was incorrect.}
+2022-11-15 16:15:40.923	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 16:15:40.924	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 16:15:40.924	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 16:15:45.492	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:15:45.496	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][3.007ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:15:45.499	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][2.234ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 16:15:45.499	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:15:45.500	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.625ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:15:45.502	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.512ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 16:15:45.504	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][1.694ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 16:15:45.505	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.518ms] [rows:-] SELECT DATABASE()
+2022-11-15 16:15:45.506	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.757ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 16:15:45.509	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.146ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 16:15:45.512	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 16:15:46.028	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 16:15:51.323	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:29][1.396ms] [rows:1] SELECT * FROM `user` WHERE id = 134 AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 16:15:51.379	[34mINFO[0m	server	middleware/logging.go:90	58.27ms       | ::1          | POST /login | {code: 0, message: }
+2022-11-15 16:25:54.994	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 16:25:54.997	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 16:25:54.997	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 21:05:58.471	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][1.398ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:05:58.554	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][80.169ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:05:58.580	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][25.701ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:05:58.581	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:05:58.583	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.533ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:05:58.607	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][23.247ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:05:58.626	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][18.291ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:05:58.627	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.507ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:05:58.629	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.474ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:05:58.635	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][6.276ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:05:58.638	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:05:59.145	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:07:16.405	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:29 record not found[12.183ms] [rows:0] SELECT * FROM `user` WHERE id = 0 AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:07:16.406	[34mINFO[0m	server	middleware/logging.go:90	13.3738ms     | ::1          | POST /login | {code: 20102, message: User was not found.}
+2022-11-15 21:07:57.738	[34mINFO[0m	server	middleware/logging.go:90	207µs         | ::1          | POST /login | {code: 10002, message: Error occurred while binding the request body to the struct.}
+2022-11-15 21:08:12.934	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:29][7.904ms] [rows:1] SELECT * FROM `user` WHERE id = 134 AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:08:13.027	[34mINFO[0m	server	middleware/logging.go:90	101.0045ms    | ::1          | POST /login | {code: 0, message: }
+2022-11-15 21:08:36.074	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][6.368ms] [rows:1] SELECT * FROM `user` WHERE email = 'email@qq.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:08:36.165	[34mINFO[0m	server	middleware/logging.go:90	98.8425ms     | ::1          | POST /login | {code: 0, message: }
+2022-11-15 21:47:38.407	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 21:47:38.412	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 21:47:38.413	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 21:47:45.513	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.558ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:47:45.540	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][26.412ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:47:45.558	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][17.808ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:47:45.560	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:47:45.562	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][1.581ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:47:45.569	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][6.521ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:47:45.582	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][11.749ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:47:45.584	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.507ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:47:45.586	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.680ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:47:45.594	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][7.757ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:47:45.600	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:47:46.116	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:47:51.295	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "973ac08f-f89e-4bc2-9eb9-95ed187188d8", "username": ""}
+2022-11-15 21:47:51.299	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:41 record not found[2.758ms] [rows:0] SELECT * FROM `user` WHERE email = '' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:48:58.581	[34mINFO[0m	server	user/register.go:22	user create function called.	{"requestID": "68b8f452-d6e5-4c2a-8b56-5b061f121e12", "username": ""}
+2022-11-15 21:48:58.594	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:29 record not found[11.269ms] [rows:0] SELECT * FROM `user` WHERE id = 2020111058 AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:48:58.734	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:19][46.728ms] [rows:1] INSERT INTO `user` (`username`,`password`,`email`,`role`,`gender`,`createdAt`,`updatedAt`,`deletedAt`,`id`) VALUES ('ysq','$2a$10$apY3Oy4KPEgOAMuN32YO..94bGD1v5tM/MgWoTcUI1yVjtb0vE2xy','yang17898441572@163.com',1,'','2022-11-15 21:48:58.689','2022-11-15 21:48:58.689',NULL,2020111058)
+2022-11-15 21:49:06.059	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "94e55d91-f23d-4cb2-9d5f-bc2682267e9b", "username": ""}
+2022-11-15 21:49:06.062	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:41 record not found[2.159ms] [rows:0] SELECT * FROM `user` WHERE email = '' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:51:17.202	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 21:51:17.203	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 21:51:17.203	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 21:51:21.719	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.443ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:51:21.725	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][5.253ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:51:21.727	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][1.921ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:51:21.727	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:51:21.729	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.510ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:51:21.731	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.519ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:51:21.734	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][2.955ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:51:21.735	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:51:21.736	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.813ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:51:21.739	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][1.707ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:51:21.743	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:51:22.249	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:51:25.468	[34mINFO[0m	server	user/resetPasswd.go:22	user getCaptcha function called.	{"requestID": "522fcc6c-dd55-48fa-9d59-1a9b4698c8a5", "username": ""}
+2022-11-15 21:51:25.470	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:41 record not found[0.506ms] [rows:0] SELECT * FROM `user` WHERE email = '' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:53:44.226	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 21:53:44.227	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 21:53:44.227	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 21:53:51.563	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.034ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:53:51.572	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][8.086ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:53:51.577	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][4.458ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:53:51.578	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.511ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:53:51.579	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.573ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:53:51.581	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.530ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:53:51.586	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][3.964ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:53:51.587	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:53:51.588	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.869ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:53:51.592	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][3.235ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:53:51.596	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:53:52.106	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:53:55.856	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "e558db72-390b-4b74-8665-909a577dda5b", "username": ""}
+2022-11-15 21:53:55.858	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:41 record not found[1.120ms] [rows:0] SELECT * FROM `user` WHERE email = '' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:56:24.136	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "f0587f67-9419-40c3-8242-6b1705019d8e", "username": ""}
+2022-11-15 21:56:24.155	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	mysql\user.go:41 record not found[18.471ms] [rows:0] SELECT * FROM `user` WHERE email = '' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:56:41.769	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 21:56:41.771	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 21:56:41.771	[34mINFO[0m	server	server/server.go:165	Server exiting
+2022-11-15 21:56:47.727	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.512ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:56:47.735	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][6.436ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:56:47.737	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][2.770ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:56:47.738	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.506ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:56:47.739	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.642ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:56:47.741	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][0.667ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:56:47.745	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][3.390ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:56:47.746	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:56:47.748	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.150ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:56:47.750	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.663ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:56:47.756	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:56:48.266	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:56:55.205	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "2100c52a-a905-468a-b918-9eab428f967b", "username": ""}
+2022-11-15 21:56:55.208	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][1.937ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 21:57:16.349	[34mINFO[0m	server	user/resetPasswd.go:21	user getCaptcha function called.	{"requestID": "3f6bf3af-e6ea-4b17-9b53-f0831f328583", "username": ""}
+2022-11-15 21:59:34.547	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 21:59:34.547	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 21:59:34.548	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 21:59:38.947	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.287ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:59:38.951	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][3.729ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:59:38.956	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][3.542ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 21:59:38.956	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:59:38.958	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][1.401ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:59:38.962	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][3.484ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 21:59:38.964	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][2.010ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 21:59:38.965	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 21:59:38.966	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.509ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 21:59:38.969	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.317ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 21:59:38.973	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 21:59:39.481	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 21:59:43.357	[34mINFO[0m	server	user/resetPasswd.go:22	user getCaptcha function called.	{"requestID": "3cf96e13-27c2-403d-a0ba-022cae887e09", "username": ""}
+2022-11-15 21:59:43.359	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][1.453ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:00:27.466	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 22:00:27.466	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 22:00:27.466	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 22:00:31.110	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.407ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:00:31.121	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][10.236ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:00:31.125	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][4.333ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 22:00:31.126	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:00:31.127	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.504ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:00:31.129	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.512ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 22:00:31.131	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][1.728ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 22:00:31.133	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:00:31.134	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.785ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:00:31.137	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.294ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 22:00:31.141	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 22:00:31.654	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 22:00:41.012	[34mINFO[0m	server	user/resetPasswd.go:22	user getCaptcha function called.	{"requestID": "1ceb4417-a0d2-4d5a-9ae3-c124f47c23e5", "username": ""}
+2022-11-15 22:00:41.014	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][1.246ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:03:21.268	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 22:03:21.271	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 22:03:21.271	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 22:03:26.638	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.509ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:03:26.647	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][7.781ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:03:26.652	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][5.187ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 22:03:26.653	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.541ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:03:26.654	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.698ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:03:26.656	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.523ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 22:03:26.659	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][2.528ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 22:03:26.661	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:03:26.662	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.699ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:03:26.667	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][4.404ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 22:03:26.672	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 22:03:27.184	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 22:03:30.555	[34mINFO[0m	server	user/resetPasswd.go:22	user getCaptcha function called.	{"requestID": "a9e62a35-83e0-4c65-aaf2-049a0bb60d7f", "username": ""}
+2022-11-15 22:03:30.558	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][1.073ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:05:45.141	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 22:05:45.141	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 22:05:45.142	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 22:06:30.135	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.506ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:06:30.142	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][6.537ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:06:30.146	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][3.873ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 22:06:30.147	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:06:30.148	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.600ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:06:30.150	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.513ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 22:06:30.152	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][1.516ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 22:06:30.152	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.053ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:06:30.154	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][1.242ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:06:30.156	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.372ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 22:06:30.159	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 22:06:30.670	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 22:06:34.318	[34mINFO[0m	server	user/resetPasswd.go:27	user getCaptcha function called.	{"requestID": "f804b276-5d7e-4dd7-9a28-fb7ac92d8e1a", "username": ""}
+2022-11-15 22:06:34.319	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][0.585ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:07:24.809	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][11.496ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:07:24.902	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:22][37.989ms] [rows:1] UPDATE `user` SET `username`='ysq',`password`='$2a$10$w6vB8l7WL6Y9CIWjroVaP.XiMl1wFJXoCA/RU1AXDDjRalUlzxS3y',`email`='yang17898441572@163.com',`role`=1,`gender`='',`createdAt`='2022-11-15 21:48:58.689',`updatedAt`='2022-11-15 22:07:24.865',`deletedAt`=NULL WHERE `user`.`deletedAt` IS NULL AND `id` = 2020111058
+2022-11-15 22:07:55.505	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][5.976ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:07:55.559	[34mINFO[0m	server	middleware/logging.go:90	61.7823ms     | ::1          | POST /login | {code: 20105, message: Password was incorrect.}
+2022-11-15 22:08:20.781	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][3.261ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:08:20.836	[34mINFO[0m	server	middleware/logging.go:90	58.4185ms     | ::1          | POST /login | {code: 0, message: }
+2022-11-15 22:10:01.667	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 22:10:01.667	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 22:10:01.667	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+
+2022-11-15 22:10:08.775	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.509ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:10:08.799	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:283][21.919ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:10:08.807	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:284][8.695ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'utest' AND table_name = 'user' AND table_type = 'BASE TABLE'
+2022-11-15 22:10:08.809	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.000ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:10:08.810	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[mysql@v1.4.3\migrator.go:326][0.598ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:10:08.811	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:168][1.048ms] [rows:-] SELECT * FROM `user` LIMIT 1
+2022-11-15 22:10:08.815	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql@v1.4.3\migrator.go:186][3.505ms] [rows:-] SELECT column_name, column_default, is_nullable = 'YES', data_type, character_maximum_length, column_type, column_key, extra, column_comment, numeric_precision, numeric_scale , datetime_precision FROM information_schema.columns WHERE table_schema = 'utest' AND table_name = 'user' ORDER BY ORDINAL_POSITION
+2022-11-15 22:10:08.817	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:768][0.510ms] [rows:-] SELECT DATABASE()
+2022-11-15 22:10:08.817	[34mINFO[0m	server	gorm@v1.24.1/finisher_api.go:509	[migrator\migrator.go:742][0.675ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'utest%' ORDER BY SCHEMA_NAME='utest' DESC,SCHEMA_NAME limit 1
+2022-11-15 22:10:08.821	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[migrator\migrator.go:750][2.400ms] [rows:-] SELECT count(*) FROM information_schema.statistics WHERE table_schema = 'utest' AND table_name = 'user' AND index_name = 'idx_deletedAt'
+2022-11-15 22:10:08.827	[34mINFO[0m	server	server/server.go:113	Start to listening the incoming requests on http address: :8080
+2022-11-15 22:10:09.335	[34mINFO[0m	server	server/server.go:140	The router has been deployed successfully.
+2022-11-15 22:10:11.353	[34mINFO[0m	server	user/resetPasswd.go:27	user getCaptcha function called.	{"requestID": "9f975c5e-10dc-44e3-a573-8dc4e32e2c30", "username": ""}
+2022-11-15 22:10:11.355	[34mINFO[0m	server	gorm@v1.24.1/callbacks.go:134	[mysql\user.go:41][1.460ms] [rows:1] SELECT * FROM `user` WHERE email = 'yang17898441572@163.com' AND `user`.`deletedAt` IS NULL ORDER BY `user`.`id` LIMIT 1
+2022-11-15 22:15:08.538	[34mINFO[0m	server	server/server.go:151	Shutting down server...
+2022-11-15 22:15:08.539	[31mERROR[0m	server	server/server.go:154	Insecure Server forced to shutdown:	{"error": "context deadline exceeded"}
+2022-11-15 22:15:08.539	[31mERROR[0m	server	server/server.go:115	listen: http: Server closed
+

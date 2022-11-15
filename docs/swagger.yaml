@@ -1,0 +1,77 @@
+basePath: /v1
+definitions:
+  user.RegRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: integer
+      schoolId:
+        type: integer
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: 2020111058@email.szu.edu.cn
+    name: 软工小组
+    url: http://www.swagger.io/support
+  description: 向前端提供api
+  title: online practice server
+  version: "1.0"
+paths:
+  /login:
+    post:
+      parameters:
+      - description: id or email
+        in: body
+        name: username
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":errno,"message":"err_msg"}'
+          schema:
+            type: string
+      summary: Login generates the authentication token
+  /users/register:
+    post:
+      description: 输入账号密码，并选择角色
+      parameters:
+      - description: '{'
+        in: body
+        name: regRequest
+        required: true
+        schema:
+          $ref: '#/definitions/user.RegRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":errno,"message":"err_msg"}'
+          schema:
+            type: string
+      summary: 注册
+  /users/test:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 测试各个模块间信息能否流通
+      tags:
+      - 测试
+swagger: "2.0"
