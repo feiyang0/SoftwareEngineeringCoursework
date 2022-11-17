@@ -28,6 +28,7 @@ func (u *UserController) Register(c *gin.Context) {
 		core.WriteResponse(c, err, nil)
 		return
 	}
+	//fmt.Println("[user]:", r)
 	if err = r.Validate(); err != nil {
 		core.WriteResponse(c, errno.ErrValidation, nil)
 		return

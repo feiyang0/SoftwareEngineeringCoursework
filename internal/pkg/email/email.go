@@ -19,12 +19,11 @@ type EmailParam struct {
 }
 
 var (
-	email EmailParam
-	once  sync.Once
+	once sync.Once
 )
+var emailIns *EmailParam
 
 func getEmail() *EmailParam {
-	var emailIns *EmailParam
 	once.Do(func() {
 		emailIns = &EmailParam{
 			ServerHost: viper.GetString("email.ServerHost"),
@@ -32,7 +31,7 @@ func getEmail() *EmailParam {
 			FromEmail:  viper.GetString("email.FromEmail"),
 			FromPasswd: viper.GetString("email.FromPasswd"),
 		}
-		fmt.Println("email:", emailIns)
+		//fmt.Println("email:", emailIns)
 	})
 	return emailIns
 }
