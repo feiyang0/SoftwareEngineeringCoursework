@@ -1,6 +1,7 @@
 package user
 
 import (
+	"SoftwareEngine/internal/pkg/log"
 	v1 "SoftwareEngine/internal/pkg/model/server/v1"
 	"SoftwareEngine/pkg/auth"
 	"SoftwareEngine/pkg/core"
@@ -33,7 +34,7 @@ type LoginRequest struct {
 // @Failure 200 {string} json "{"code":errno,"message":"err_msg"}"
 // @Router /login [post].
 func (u *UserController) Login(c *gin.Context) {
-	// Binding the data with the user struct.
+	log.L(c).Info("user create function called.")
 	var r LoginRequest
 	var err error
 	if err = c.ShouldBindJSON(&r); err != nil {
@@ -59,8 +60,8 @@ func (u *UserController) Login(c *gin.Context) {
 		return
 	}
 
-	// Sign the json web token.
-	t, err := token.Sign(fmt.Sprintf("%d", user.ID))
+	// use Role-userId Sign the json web token.
+	t, err := token.Sign(fmt.Sprintf("%d%d", user.Role, user.ID))
 	if err != nil {
 		core.WriteResponse(c, errno.ErrToken, nil)
 		return
@@ -68,40 +69,3 @@ func (u *UserController) Login(c *gin.Context) {
 
 	core.WriteResponse(c, nil, LoginResponse{Token: t})
 }
-
-//type LoginRequest1 struct {
-//	Email    string `json:"email"`
-//	Password string `json:"password"`
-//}
-//
-//func (u *UserController) LoginByEmail(c *gin.Context) {
-//	// Binding the data with the user struct.
-//	var r LoginRequest1
-//
-//	if err := c.ShouldBindJSON(&r); err != nil {
-//		core.WriteResponse(c, errno.ErrBind, nil)
-//		return
-//	}
-//	//fmt.Println("[LoginRequest]:", r)
-//	// Get the user information by the login username.
-//	user, err := u.userS.GetByEmail(r.Email)
-//	if err != nil {
-//		core.WriteResponse(c, errno.ErrUserNotFound, nil)
-//		return
-//	}
-//
-//	// Compare the login password with the user password.
-//	if err = auth.Compare(user.Password, r.Password); err != nil {
-//		core.WriteResponse(c, errno.ErrPasswordIncorrect, nil)
-//		return
-//	}
-//
-//	// Sign the json web token.
-//	t, err := token.Sign(fmt.Sprintf("%d", user.ID))
-//	if err != nil {
-//		core.WriteResponse(c, errno.ErrToken, nil)
-//		return
-//	}
-//
-//	core.WriteResponse(c, nil, LoginResponse{Token: t})
-//}

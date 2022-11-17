@@ -1,5 +1,5 @@
-# DROP database IF EXISTS UTest;
-# create database UTest;
+DROP database IF EXISTS UTest;
+create database UTest;
 
 DROP table IF EXISTS `user`;
 DROP table IF EXISTS `course`;

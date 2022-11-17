@@ -82,7 +82,7 @@ func run() error {
 	defer mysqlStore.Close()
 
 	// init secret key in token package
-	token.Init(viper.GetString("jwt_secret"), constant.XUsernameKey)
+	token.Init(viper.GetString("jwt_secret"), constant.XUserIdKey)
 
 	// set gin mode
 	gin.SetMode(viper.GetString("runmode"))

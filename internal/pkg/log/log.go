@@ -533,8 +533,8 @@ func (l *zapLogger) L(ctx context.Context) *zapLogger {
 	if requestID := ctx.Value(KeyRequestID); requestID != nil {
 		lg.zapLogger = lg.zapLogger.With(zap.Any(KeyRequestID, requestID))
 	}
-	if username := ctx.Value(KeyUsername); username != nil {
-		lg.zapLogger = lg.zapLogger.With(zap.Any(KeyUsername, username))
+	if username := ctx.Value(KeyUserId); username != nil {
+		lg.zapLogger = lg.zapLogger.With(zap.Any(KeyUserId, username))
 	}
 
 	return lg

@@ -26,17 +26,21 @@ func (ds *datastore) Users() store.UserStore {
 	return newUsers(ds)
 }
 
-func (ds *datastore) Students() store.StudentStore {
-	return newStudents(ds)
+func (ds *datastore) Problems() store.ProblemStore {
+	return newProblems(ds)
 }
 
-func (ds *datastore) Teachers() store.TeacherStore {
-	return newTeachers(ds)
-}
-
-func (ds *datastore) Admins() store.AdminStore {
-	return newAdmin(ds)
-}
+//func (ds *datastore) Students() store.StudentStore {
+//	return newStudents(ds)
+//}
+//
+//func (ds *datastore) Teachers() store.TeacherStore {
+//	return newTeachers(ds)
+//}
+//
+//func (ds *datastore) Admins() store.AdminStore {
+//	return newAdmin(ds)
+//}
 
 func (ds *datastore) Close() error {
 	if ds.db == nil {
@@ -108,13 +112,16 @@ func cleanDatabase(db *gorm.DB) error {
 // won't delete/change current data.
 // nolint:unused // may be reused in the feature, or just show a migrate usage.
 func migrateDatabase(db *gorm.DB) error {
+	// userTable
 	if err := db.AutoMigrate(&v1.User{}); err != nil {
 		return err
 	}
 
-	//if err := db.AutoMigrate(); err != nil {
-	//	return err
-	//}
+	// 问题
+	err := db.AutoMigrate(&v1.Problem{}, &v1.Tag{})
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

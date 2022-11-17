@@ -42,11 +42,14 @@ var (
 	// ErrCaptchaIncorrect represents the Captcha is incorrect.
 	ErrCaptchaIncorrect = &Errno{Code: 20106, Message: "Captcha was incorrect."}
 
-	// ErrPostNotFound represents  the post not found.
-	ErrPostNotFound = &Errno{Code: 20201, Message: "Post was not found."}
+	// ErrProblemNotFound err
+	ErrProblemNotFound = &Errno{Code: 20201, Message: "problem was not found."}
 
-	// ErrPostAlreadyExist represents the post already exist.
-	ErrPostAlreadyExist = &Errno{Code: 20202, Message: "Post already exist."}
+	//
+	ErrTagNotFound = &Errno{Code: 20202, Message: "tag was not found."}
+
+	// ErrProblemAlreadyExist represents the post already exist.
+	ErrProblemAlreadyExist = &Errno{Code: 20203, Message: "Post already exist."}
 )
 
 // Errno defines a new error type used by goserver.

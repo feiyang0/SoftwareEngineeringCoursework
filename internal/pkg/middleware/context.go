@@ -10,7 +10,7 @@ import (
 func Context() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Set(log.KeyRequestID, c.GetString(constant.XRequestIDKey))
-		c.Set(log.KeyUsername, c.GetString(constant.XUsernameKey))
+		c.Set(log.KeyUserId, c.GetString(constant.XUserIdKey))
 		c.Next()
 	}
 }

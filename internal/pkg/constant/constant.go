@@ -1,8 +1,8 @@
 package constant
 
 const (
-	// XUsernameKey defines the key in gin context which represents the owner of the token.
-	XUsernameKey = "X-Username"
+	// XUserIdKey defines the key in gin context which represents the owner of the token.
+	XUserIdKey = "X-User-Id"
 
 	// XRequestIDKey defines the key in gin context which represents the uuid of the request.
 	XRequestIDKey = "X-Request-ID"

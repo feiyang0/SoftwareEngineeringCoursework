@@ -24,7 +24,8 @@ func (u *UserController) Register(c *gin.Context) {
 	var err error
 
 	if err = c.ShouldBind(&r); err != nil {
-		core.WriteResponse(c, errno.ErrBind, err)
+		//core.WriteResponse(c, errno.ErrBind, err)
+		core.WriteResponse(c, err, nil)
 		return
 	}
 	if err = r.Validate(); err != nil {
@@ -44,6 +45,7 @@ func (u *UserController) Register(c *gin.Context) {
 	}
 	if err = u.userS.Create(&r); err != nil {
 		core.WriteResponse(c, err, nil)
+		return
 	}
 	core.WriteResponse(c, nil, r)
 }
