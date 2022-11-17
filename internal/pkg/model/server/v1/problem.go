@@ -6,11 +6,12 @@ type Problem struct {
 	// 所属course
 	CourseName string `json:"courseName,omitempty" gorm:"column:courseName;size:64;not null"`
 	// 题目类型选择，填空，大题
-	Category string `json:"category,omitempty" gorm:"column:category;size:256"`
-	Title    string `json:"title" gorm:"column:title;size:256;not null;unique"`
-	Question string `json:"question" gorm:"column:question"`
-	Cnt      int    `gorm:"column:cnt"`
-	Tags     []Tag  `json:"tags" gorm:"many2many:problem_tags;"`
+	Category   string `json:"category,omitempty" gorm:"column:category;size:256"`
+	Title      string `json:"title" gorm:"column:title;size:256;not null;unique"`
+	Question   string `json:"question" gorm:"column:question"`
+	Cnt        int    `gorm:"column:cnt"`
+	Difficulty string `json:"difficulty" gorm:"column:difficulty"`
+	Tags       []Tag  `json:"tags" gorm:"many2many:problem_tags;"`
 }
 
 func (s *Problem) TableName() string {

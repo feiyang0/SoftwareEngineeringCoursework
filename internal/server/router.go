@@ -77,7 +77,7 @@ func installController(g *gin.Engine) {
 		problem := v1.Group("/problem", authMiddleware("2"))
 		{
 			problem.GET("tag", problemH.GetTags)
-			problem.GET("all", problemH.GetAll)
+			problem.POST("all", problemH.GetAll)
 			problem.GET(":problemName", problemH.GetProblem)
 		}
 
