@@ -2,7 +2,6 @@ package user
 
 import (
 	"SoftwareEngine/internal/pkg/email"
-	"SoftwareEngine/internal/pkg/log"
 	"SoftwareEngine/pkg/auth"
 	"SoftwareEngine/pkg/core"
 	"SoftwareEngine/pkg/errno"
@@ -23,22 +22,23 @@ func (u *UserController) GetCaptcha(c *gin.Context) {
 	once.Do(func() {
 		CaptchaStore = make(map[string]string)
 	})
-	log.L(c).Info("user getCaptcha function called.")
-	var r ResetReq
-	if err := c.ShouldBindJSON(&r); err != nil {
-		core.WriteResponse(c, errno.ErrBind, nil)
-		return
-	}
-	if t, _ := u.userS.GetByEmail(r.Email); t == nil {
+	//log.L(c).Info("user getCaptcha function called.")
+	//var r ResetReq
+	//if err := c.ShouldBindJSON(&r); err != nil {
+	//	core.WriteResponse(c, errno.ErrBind, nil)
+	//	return
+	//}
+	em := c.Query("email")
+	if t, _ := u.userS.GetByEmail(em); t == nil {
 		core.WriteResponse(c, errno.ErrUserNotFound, nil)
 		return
 	}
-	Captcha, err := email.SendCaptcha(r.Email)
+	Captcha, err := email.SendCaptcha(em)
 	if err != nil {
 		core.WriteResponse(c, err, nil)
 		return
 	}
-	CaptchaStore[r.Email] = Captcha
+	CaptchaStore[em] = Captcha
 	core.WriteResponse(c, errno.OK, nil)
 }
 
