@@ -5,6 +5,7 @@
 
 # logs
 logs
+*.log
 
 # Editors
 *~
