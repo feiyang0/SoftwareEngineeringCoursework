@@ -12,6 +12,9 @@ type Problem struct {
 	Cnt        int    `gorm:"column:cnt"`
 	Difficulty string `json:"difficulty" gorm:"column:difficulty"`
 	Tags       []Tag  `json:"tags" gorm:"many2many:problem_tags;"`
+	// 不存数据库，但是可以用于返回
+	Pass   bool `json:"pass" gorm:"-"`
+	Favour bool `json:"favour" gorm:"-"`
 }
 
 func (s *Problem) TableName() string {

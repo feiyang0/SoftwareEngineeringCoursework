@@ -61,7 +61,8 @@ func (u *UserController) Login(c *gin.Context) {
 	}
 
 	// use Role-userId Sign the json web token.
-	t, err := token.Sign(fmt.Sprintf("%d%d", user.Role, user.ID))
+	t, err := token.Sign(fmt.Sprintf("%d%d", *user.Role, user.ID))
+	//fmt.Println("sign: ", *user.Role, user.ID)
 	if err != nil {
 		core.WriteResponse(c, errno.ErrToken, nil)
 		return

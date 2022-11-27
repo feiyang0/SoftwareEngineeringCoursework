@@ -1,7 +1,6 @@
 package problem
 
 import (
-	"SoftwareEngine/internal/pkg/constant"
 	"SoftwareEngine/internal/pkg/log"
 	v1 "SoftwareEngine/internal/pkg/model/server/v1"
 	"SoftwareEngine/pkg/core"
@@ -10,8 +9,8 @@ import (
 	"strconv"
 )
 
-func (p *ProblemController) Create(c *gin.Context) {
-	log.L(c).Info("problem create function called.")
+func (p *ProblemController) Update(c *gin.Context) {
+	log.L(c).Info("problem update function called.")
 
 	var r v1.Problem
 	var err error
@@ -21,14 +20,13 @@ func (p *ProblemController) Create(c *gin.Context) {
 		return
 	}
 
-	//r.SchoolId = uint64(c.GetInt(constant.XUserIdKey))
-	idKey := c.GetString(constant.XUserIdKey)
-	schoolId, _ := strconv.ParseInt(idKey, 10, 64)
-	r.SchoolId = uint64(schoolId)
+	id, _ := strconv.ParseInt(c.Param("problemId"), 10, 64)
+	r.ID = uint64(id)
 
-	if err = p.problemS.Create(&r); err != nil {
+	if err = p.problemS.Update(&r); err != nil {
 		core.WriteResponse(c, err, nil)
 		return
 	}
+
 	core.WriteResponse(c, errno.OK, nil)
 }

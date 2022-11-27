@@ -5,6 +5,7 @@ import (
 	"SoftwareEngine/internal/pkg/constant"
 	"SoftwareEngine/internal/pkg/middleware"
 	"SoftwareEngine/internal/server/controller/v1/problem"
+	"SoftwareEngine/internal/server/controller/v1/student"
 	"SoftwareEngine/internal/server/controller/v1/user"
 	"SoftwareEngine/internal/server/store/mysql"
 	"SoftwareEngine/pkg/core"
@@ -74,19 +75,29 @@ func installController(g *gin.Engine) {
 	// 题目模块
 	{
 		problemH := problem.NewProblemController(storeIns)
-		problem := v1.Group("/problem", authMiddleware("2"))
+		stuH := student.NewStudentController(storeIns)
+
+		p := v1.Group("/problem", authMiddleware("2"))
 		{
-			problem.GET("tag", problemH.GetTags)
-			problem.POST("all", problemH.GetAll)
-			problem.GET(":problemName", problemH.GetProblem)
+			p.GET("tag", problemH.GetTags)
+			p.POST("all", problemH.GetAll)
+			p.POST("allWithTag", problemH.GetAllWithTags)
+			p.GET(":problemName", problemH.GetProblem)
+
+			p.GET("commit", stuH.Commit)
+			p.DELETE("commit", stuH.CancelCommit)
+
+			p.GET("collection", stuH.Collect)
+			p.DELETE("collection", stuH.CancelCollect)
+
 		}
 
-		//// 题目进行修改，添加删除
-		authProblemv1 := v1.Group("/problem", authMiddleware("1"))
+		// 题目修改,添加,删除
+		teacherH := v1.Group("/problem", authMiddleware("1"))
 		{
-			authProblemv1.POST("create", problemH.Create)
-			//authProblemv1.PUT("")
-			//authProblemv1.DELETE("name")
+			teacherH.POST("create", problemH.Create)
+			teacherH.PUT(":problemId", problemH.Update)
+			teacherH.DELETE(":problemId", problemH.Delete)
 		}
 	}
 	// 评论区模块

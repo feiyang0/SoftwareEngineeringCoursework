@@ -16,10 +16,6 @@ import (
 
 type datastore struct {
 	db *gorm.DB
-
-	// can include two database instance if needed
-	// docker *grom.DB
-	// db *gorm.DB
 }
 
 func (ds *datastore) Users() store.UserStore {
@@ -30,10 +26,10 @@ func (ds *datastore) Problems() store.ProblemStore {
 	return newProblems(ds)
 }
 
-//func (ds *datastore) Students() store.StudentStore {
-//	return newStudents(ds)
-//}
-//
+func (ds *datastore) Students() store.StudentStore {
+	return newStudents(ds)
+}
+
 //func (ds *datastore) Teachers() store.TeacherStore {
 //	return newTeachers(ds)
 //}
@@ -118,10 +114,16 @@ func migrateDatabase(db *gorm.DB) error {
 	}
 
 	// 问题
-	err := db.AutoMigrate(&v1.Problem{}, &v1.Tag{})
-	if err != nil {
+	if err := db.AutoMigrate(&v1.Problem{}, &v1.Tag{}); err != nil {
 		return err
 	}
+
+	if err := db.AutoMigrate(&v1.StudentProblem{}); err != nil {
+		return err
+	}
+	//if err := db.SetupJoinTable(&v1.User{}, "Problems", &v1.StudentProblem{}); err != nil {
+	//	return err
+	//}
 
 	return nil
 }

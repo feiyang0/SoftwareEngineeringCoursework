@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"gorm.io/gorm"
 	"regexp"
+	"strconv"
 )
 
 type problems struct {
@@ -25,32 +26,20 @@ func (p *problems) Create(problem *v1.Problem) error {
 		}
 		return err
 	}
-	//// 存tag
-	//var tags []v1.Tag
-	//var pTags []v1.ProblemTag
-	//// 存problem-tag
-	//for _, t := range problem.Tags {
-	//	pTags = append(pTags, v1.ProblemTag{ProblemId: problem.ID, TagName: t.Name})
-	//	// tag存在就插入
-	//	tag := &v1.Tag{}
-	//	err := u.db.Where("name = ?", t).First(&tag).Error
-	//	if err != nil && errors.Is(err, gorm.ErrRecordNotFound) {
-	//		tags = append(tags, *tag)
-	//	}
-	//}
-	//if err := u.db.Create(&tags).Error; err != nil {
-	//	return err
-	//}
-	//if err := u.db.Create(&pTags).Error; err != nil {
-	//	return err
-	//}
 	return nil
 }
 
 func (p *problems) Update(problem *v1.Problem) error {
+	tempp := &v1.Problem{}
+	p.db.Where("id = ?", problem.ID).First(tempp)
+	problem.CreatedAt = tempp.CreatedAt
 	return p.db.Save(problem).Error
 }
-func (p *problems) Delete(title string) error {
+func (p *problems) Delete(ID uint64) error {
+	err := p.db.Where("id = ?", ID).Delete(&v1.Problem{}).Error
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		return errno.ErrProblemNotFound
+	}
 	return nil
 }
 func (p *problems) GetTags() ([]*v1.Tag, error) {
@@ -63,7 +52,7 @@ func (p *problems) GetTags() ([]*v1.Tag, error) {
 	}
 	return tags, nil
 }
-func (p *problems) GetAll(opts *v1.ListOption) ([]*v1.Problem, error) {
+func (p *problems) GetAll(opts *v1.ProblemListOption) ([]*v1.Problem, error) {
 	var ps []*v1.Problem
 	p.db.Offset(opts.Offset).Limit(opts.Limit).
 		Order("id").Find(&ps)
@@ -71,13 +60,54 @@ func (p *problems) GetAll(opts *v1.ListOption) ([]*v1.Problem, error) {
 	for _, problem := range ps {
 		p.db.Model(&problem).Association("Tags").Find(&problem.Tags)
 	}
+
 	return ps, nil
 }
-func (p *problems) GetAllWithTag(opts *v1.ListOption) ([]*v1.Problem, error) {
+func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.Problem, error) {
 	var ps []*v1.Problem
-	orders := fmt.Sprintf("%s %s", opts.OrderBy, opts.SortOrder)
+	//orders := fmt.Sprintf("%s %s", opts.OrderBy, opts.SortOrder)
+	var orders string
+	for _, o := range opts.Orders {
+		orders += fmt.Sprintf("%s %s,", o.OrderBy, o.SortOrder)
+	}
+	orders = orders[0 : len(orders)-1]
+	fmt.Println("[orders]:", orders)
 
-	p.db.Order(orders)
+	tx := p.db.Model(&v1.Problem{}) // 这里需要先初始化
+	// 先关键词搜索
+	if opts.SearchKeyWords != "" {
+		keyId, err := strconv.ParseInt(opts.SearchKeyWords, 10, 64)
+		if err == nil {
+			tx = tx.Where("id = ?", uint64(keyId))
+		} else {
+			tx = tx.Where(fmt.Sprintf(" title like '%%%s%%' ", opts.SearchKeyWords))
+		}
+	}
+	if opts.Category != "" {
+		tx = tx.Where("category = ?", opts.Category)
+	}
+	if opts.CourseName != "" {
+		tx = tx.Where("courseName = ?", opts.CourseName)
+	}
+	if opts.Tag != "" {
+		tx = tx.Joins("left join problem_tags on problem_tags.problem_id = problem.id").
+			Where("problem_tags.tag_name = ? and  ", opts.Tag)
+	}
+	//p.db.Offset(opts.Offset).Limit(opts.Limit).Order(orders).
+	//	Joins("left join problem_tags on problem_tags.problem_id = problem.id").
+	//	Where("problem_tags.tag_name = ? and  ", opts.Tag).Find(&ps)
+
+	// 取数据
+	tx = p.db.Offset(opts.Offset).Limit(opts.Limit).Order(orders).Find(&ps)
+	// 同步题目状态
+	for _, problem := range ps {
+		p.db.Model(&problem).Association("Tags").Find(&problem.Tags)
+
+		stuP := &v1.StudentProblem{}
+		p.db.Where("user_id = ? and problem_id = ?", uid, problem.ID).First(&stuP)
+		problem.Pass, problem.Favour = stuP.Pass, stuP.Favour
+	}
+
 	return ps, nil
 }
 func (p *problems) GetProblem(title string) (*v1.Problem, error) {

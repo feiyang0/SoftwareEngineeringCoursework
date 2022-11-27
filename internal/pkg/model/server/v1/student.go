@@ -1,19 +1,19 @@
 package v1
 
-type Student struct {
-	SchoolId uint64
-}
+import "time"
 
 type StudentProblem struct {
-	BaseModel
-	SchoolId  uint64 `json:"schoolId" gorm:"column:schoolId"`
-	ProblemId uint64 `json:"problemId" gorm:"column:problemId"`
+	UserId    uint64 `gorm:"primary_key"`
+	ProblemId uint64 `gorm:"primary_key"`
 	Pass      bool   `json:"pass" gorm:"column:pass"`
-	Count     int    `json:"count" gorm:"column:count"`
+	Favour    bool   `json:"favour" gorm:"column:favour"`
+
+	CreatedAt time.Time `json:"createdAt,omitempty" gorm:"column:createdAt"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty" gorm:"column:updatedAt"`
 }
 
 func (s *StudentProblem) TableName() string {
-	return "studentProblem"
+	return "student_problem"
 }
 
 type StudentClass struct {
