@@ -67,11 +67,13 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 	var ps []*v1.Problem
 	//orders := fmt.Sprintf("%s %s", opts.OrderBy, opts.SortOrder)
 	var orders string
-	for _, o := range opts.Orders {
-		orders += fmt.Sprintf("%s %s,", o.OrderBy, o.SortOrder)
+
+	if opts.Orders != nil {
+		for _, o := range opts.Orders {
+			orders += fmt.Sprintf("%s %s,", o.OrderBy, o.SortOrder)
+		}
+		orders = orders[0 : len(orders)-1]
 	}
-	orders = orders[0 : len(orders)-1]
-	fmt.Println("[orders]:", orders)
 
 	tx := p.db.Model(&v1.Problem{}) // 这里需要先初始化
 	// 先关键词搜索
