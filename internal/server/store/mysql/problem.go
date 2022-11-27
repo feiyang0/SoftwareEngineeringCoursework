@@ -75,32 +75,33 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 		orders = orders[0 : len(orders)-1]
 	}
 
-	tx := p.db.Model(&v1.Problem{}) // 这里需要先初始化
+	tx := p.db.Where("").Find(&ps) // 这里需要先初始化
 	// 先关键词搜索
 	if opts.SearchKeyWords != "" {
 		keyId, err := strconv.ParseInt(opts.SearchKeyWords, 10, 64)
 		if err == nil {
-			tx = tx.Where("id = ?", uint64(keyId))
+			//fmt.Println("--------", keyId, "------------")
+			tx.Where("id = ?", uint64(keyId)).Find(&ps)
 		} else {
-			tx = tx.Where(fmt.Sprintf(" title like '%%%s%%' ", opts.SearchKeyWords))
+			tx.Where(fmt.Sprintf(" title like '%%%s%%' ", opts.SearchKeyWords)).Find(&ps)
 		}
 	}
 	if opts.Category != "" {
-		tx = tx.Where("category = ?", opts.Category)
+		//fmt.Println("--------", opts.Category, "------------")
+		tx.Where("category = ?", opts.Category).Find(&ps)
 	}
 	if opts.CourseName != "" {
-		tx = tx.Where("courseName = ?", opts.CourseName)
+		tx.Where("courseName = ?", opts.CourseName).Find(&ps)
 	}
 	if opts.Tag != "" {
-		tx = tx.Joins("left join problem_tags on problem_tags.problem_id = problem.id").
-			Where("problem_tags.tag_name = ? and  ", opts.Tag)
+		//fmt.Println("--------", opts.Tag, "------------")
+		tx.Joins("left join problem_tags on problem_tags.problem_id = problem.id").
+			Where("problem_tags.tag_name = ?", opts.Tag).Find(&ps)
 	}
-	//p.db.Offset(opts.Offset).Limit(opts.Limit).Order(orders).
-	//	Joins("left join problem_tags on problem_tags.problem_id = problem.id").
-	//	Where("problem_tags.tag_name = ? and  ", opts.Tag).Find(&ps)
 
 	// 取数据
-	tx = p.db.Offset(opts.Offset).Limit(opts.Limit).Order(orders).Find(&ps)
+	tx.Offset(opts.Offset).Limit(opts.Limit).Order(orders).Find(&ps)
+	fmt.Println(ps)
 	// 同步题目状态
 	for _, problem := range ps {
 		p.db.Model(&problem).Association("Tags").Find(&problem.Tags)

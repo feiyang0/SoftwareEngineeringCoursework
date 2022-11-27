@@ -31,14 +31,14 @@ func TestProblems(t *testing.T) {
 	}
 	p := dbIns.Problems()
 	opts := &v1.ProblemListOption{
-		Category:   "选择",
-		CourseName: "学科分类",
-		//Orders: []v1.Order{
-		//	{OrderBy: "cnt", SortOrder: "asc"},
-		//},
+		Category: "填空",
+		//CourseName: "学科分类",
+		////Orders: []v1.Order{
+		////	{OrderBy: "cnt", SortOrder: "asc"},
+		////},
 		Tag:            "t1",
 		SearchKeyWords: "题目",
-		Limit:          3,
+		Limit:          10,
 		Offset:         0,
 	}
 	ps, err := p.GetAllWithTag(11, opts)
