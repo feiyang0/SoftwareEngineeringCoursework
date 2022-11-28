@@ -17,7 +17,7 @@ func (p *ProblemController) Create(c *gin.Context) {
 	var err error
 
 	if err = c.ShouldBindJSON(&r); err != nil {
-		core.WriteResponse(c, errno.ErrBind, nil)
+		core.WriteResponse(c, err, nil)
 		return
 	}
 

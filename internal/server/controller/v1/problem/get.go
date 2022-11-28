@@ -6,7 +6,6 @@ import (
 	v1 "SoftwareEngine/internal/pkg/model/server/v1"
 	"SoftwareEngine/pkg/core"
 	"SoftwareEngine/pkg/errno"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -40,7 +39,8 @@ func (p *ProblemController) GetAll(c *gin.Context) {
 func (p *ProblemController) GetProblem(c *gin.Context) {
 	log.L(c).Info("problem get problem function called.")
 
-	problem, err := p.problemS.GetProblem(c.Param("problemName"))
+	id, _ := strconv.ParseInt(c.Param("problemId"), 10, 64)
+	problem, err := p.problemS.GetProblem(uint64(id))
 	if err != nil {
 		core.WriteResponse(c, err, nil)
 		return
@@ -53,15 +53,13 @@ func (p *ProblemController) GetAllWithTags(c *gin.Context) {
 	var r v1.ProblemListOption
 
 	if err := c.ShouldBindJSON(&r); err != nil {
-		core.WriteResponse(c, errno.ErrBind, nil)
+		core.WriteResponse(c, err, nil)
 		return
 	}
 
 	//uid := uint64(c.GetInt(constant.XUserIdKey))
 	schoolId, err := strconv.ParseInt(c.GetString(constant.XUserIdKey), 10, 64)
 	uid := uint64(schoolId)
-
-	fmt.Println("problem get id:", uid)
 
 	problems, err := p.problemS.GetAllWithTag(uid, &r)
 	if err != nil {

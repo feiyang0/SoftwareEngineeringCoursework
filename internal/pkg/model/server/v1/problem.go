@@ -10,7 +10,7 @@ type Problem struct {
 	Title      string `json:"title" gorm:"column:title;size:256;not null;unique"`
 	Question   string `json:"question" gorm:"column:question"`
 	Cnt        int    `gorm:"column:cnt"`
-	Difficulty string `json:"difficulty" gorm:"column:difficulty"`
+	Difficulty int8   `json:"difficulty" gorm:"column:difficulty"`
 	Tags       []Tag  `json:"tags" gorm:"many2many:problem_tags;"`
 	// 不存数据库，但是可以用于返回
 	Pass   bool `json:"pass" gorm:"-"`
@@ -29,11 +29,11 @@ func (t *Tag) TableName() string {
 	return "tag"
 }
 
-//type ProblemTag struct {
-//	ProblemId uint64 `gorm:"column:problemId;primary_key"`
-//	TagName   string `gorm:"column:tagName;primary_key"`
-//}
-//
-//func (pt *ProblemTag) TableName() string {
-//	return "problemTag"
-//}
+type ProblemTag struct {
+	ProblemId uint64 `gorm:"column:problem_id"`
+	TagName   string `gorm:"column:tag_name"`
+}
+
+func (pt *ProblemTag) TableName() string {
+	return "problemTag"
+}

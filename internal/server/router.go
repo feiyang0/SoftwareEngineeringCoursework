@@ -68,21 +68,23 @@ func installController(g *gin.Engine) {
 		g.GET("/resetPasswd", userController.GetCaptcha)
 		g.POST("/resetPasswd", userController.CheckCaptcha)
 		g.PUT("/resetPasswd", userController.SetNewPasswd)
-	}
 
+		u := g.Group("user", authMiddleware("2"))
+		u.GET("/info", userController.Get)
+	}
 	v1 := g.Group("/v1")
 
 	// 题目模块
 	{
 		problemH := problem.NewProblemController(storeIns)
 		stuH := student.NewStudentController(storeIns)
-
 		p := v1.Group("/problem", authMiddleware("2"))
 		{
+
 			p.GET("tag", problemH.GetTags)
 			p.POST("all", problemH.GetAll)
 			p.POST("allWithTag", problemH.GetAllWithTags)
-			p.GET(":problemName", problemH.GetProblem)
+			p.GET(":problemId", problemH.GetProblem)
 
 			p.GET("commit", stuH.Commit)
 			p.DELETE("commit", stuH.CancelCommit)

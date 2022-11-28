@@ -20,6 +20,7 @@ func newProblems(ds *datastore) *problems {
 
 func (p *problems) Create(problem *v1.Problem) error {
 	// 存problem
+	problem.Cnt = 0
 	if err := p.db.Create(&problem).Error; err != nil {
 		if match, _ := regexp.MatchString("Duplicate entry '.*' for key 'problem.title'", err.Error()); match {
 			return errno.ErrProblemAlreadyExist
@@ -30,18 +31,23 @@ func (p *problems) Create(problem *v1.Problem) error {
 }
 
 func (p *problems) Update(problem *v1.Problem) error {
-	tempp := &v1.Problem{}
-	p.db.Where("id = ?", problem.ID).First(tempp)
-	problem.CreatedAt = tempp.CreatedAt
-	return p.db.Save(problem).Error
+	tempP, _ := p.GetProblem(problem.ID)
+
+	pt := &v1.ProblemTag{}
+	p.db.Where("problem_id = ?", problem.ID).Delete(&pt)
+
+	problem.CreatedAt = tempP.CreatedAt
+	return p.db.Save(&problem).Error
 }
-func (p *problems) Delete(ID uint64) error {
-	err := p.db.Where("id = ?", ID).Delete(&v1.Problem{}).Error
+
+func (p *problems) Delete(id uint64) error {
+	err := p.db.Where("id = ?", id).Delete(&v1.Problem{}).Error
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return errno.ErrProblemNotFound
 	}
 	return nil
 }
+
 func (p *problems) GetTags() ([]*v1.Tag, error) {
 	var tags []*v1.Tag
 	if err := p.db.Find(&tags).Error; err != nil {
@@ -86,12 +92,15 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 			tx.Where(fmt.Sprintf(" title like '%%%s%%' ", opts.SearchKeyWords)).Find(&ps)
 		}
 	}
+	if opts.CourseName != "" {
+		tx.Where("courseName = ?", opts.CourseName).Find(&ps)
+	}
 	if opts.Category != "" {
 		//fmt.Println("--------", opts.Category, "------------")
 		tx.Where("category = ?", opts.Category).Find(&ps)
 	}
-	if opts.CourseName != "" {
-		tx.Where("courseName = ?", opts.CourseName).Find(&ps)
+	if opts.Difficulty != 0 {
+		tx.Where("difficulty = ?", opts.Difficulty).Find(&ps)
 	}
 	if opts.Tag != "" {
 		//fmt.Println("--------", opts.Tag, "------------")
@@ -101,7 +110,6 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 
 	// 取数据
 	tx.Offset(opts.Offset).Limit(opts.Limit).Order(orders).Find(&ps)
-	fmt.Println(ps)
 	// 同步题目状态
 	for _, problem := range ps {
 		p.db.Model(&problem).Association("Tags").Find(&problem.Tags)
@@ -113,9 +121,9 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 
 	return ps, nil
 }
-func (p *problems) GetProblem(title string) (*v1.Problem, error) {
+func (p *problems) GetProblem(id uint64) (*v1.Problem, error) {
 	problem := &v1.Problem{}
-	err := p.db.Where("title = ?", title).First(&problem).Error
+	err := p.db.Where("id = ?", id).First(&problem).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errno.ErrProblemNotFound

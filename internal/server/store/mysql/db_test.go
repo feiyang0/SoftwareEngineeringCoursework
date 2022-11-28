@@ -30,19 +30,38 @@ func TestProblems(t *testing.T) {
 		fmt.Println("dbIns err:", err)
 	}
 	p := dbIns.Problems()
-	opts := &v1.ProblemListOption{
-		Category: "填空",
-		//CourseName: "学科分类",
-		////Orders: []v1.Order{
-		////	{OrderBy: "cnt", SortOrder: "asc"},
-		////},
-		Tag:            "t1",
-		SearchKeyWords: "题目",
-		Limit:          10,
-		Offset:         0,
+	problem := &v1.Problem{
+		SchoolId:   123,
+		CourseName: "软工",
+		Category:   "学科名",
+		Title:      "abc",
+		Question:   "题目内容",
+		Difficulty: 1,
+		Tags: []v1.Tag{
+			{Name: "t1"},
+			{Name: "t2"},
+		},
 	}
-	ps, err := p.GetAllWithTag(11, opts)
-	for _, problem := range ps {
-		fmt.Println(problem)
-	}
+	//p.Create(problem)
+	//pb, _ := p.GetProblem(36)
+	problem.ID = 36
+	p.Update(problem)
+	pb, _ := p.GetProblem(36)
+	fmt.Println(pb.Tags)
+	//p.Delete(12)
+	//opts := &v1.ProblemListOption{
+	//	//Category:   "选择",
+	//	//CourseName: "学科分类",
+	//	Orders: []v1.Order{
+	//		{OrderBy: "cnt", SortOrder: "asc"},
+	//	},
+	//	Tag: "t2",
+	//	//SearchKeyWords: "题目",
+	//	Limit:  10,
+	//	Offset: 0,
+	//}
+	//ps, err := p.GetAllWithTag(11, opts)
+	//for _, pm := range ps {
+	//	fmt.Println(pm)
+	//}
 }

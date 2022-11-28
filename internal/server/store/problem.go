@@ -7,7 +7,7 @@ type ProblemStore interface {
 	GetTags() ([]*v1.Tag, error)
 	GetAll(opts *v1.ProblemListOption) ([]*v1.Problem, error)
 	GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.Problem, error)
-	GetProblem(title string) (*v1.Problem, error)
+	GetProblem(id uint64) (*v1.Problem, error)
 	Update(problem *v1.Problem) error
-	Delete(ID uint64) error
+	Delete(id uint64) error
 }

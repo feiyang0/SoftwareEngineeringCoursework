@@ -5,12 +5,14 @@ type ProblemListOption struct {
 	CourseName string  `json:"courseName,omitempty"`
 	Orders     []Order `json:"orders,omitempty"`
 
+	Difficulty int8 `json:"difficulty,omitempty"`
+
 	Tag string `json:"tag,omitempty"`
 
 	SearchKeyWords string `json:"searcherKeyWords,omitempty"`
 
-	Limit  int `json:"limit" binding:"required"`
-	Offset int `json:"offset" binding:"required"`
+	Limit  int `json:"limit"`
+	Offset int `json:"offset"`
 }
 
 type Order struct {
