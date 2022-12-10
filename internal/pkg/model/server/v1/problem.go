@@ -15,6 +15,8 @@ type Problem struct {
 	// 不存数据库，但是可以用于返回
 	Pass   bool `json:"pass" gorm:"-"`
 	Favour bool `json:"favour" gorm:"-"`
+
+	Solutions []Solution `json:"solutions" gorm:"many2many:problem_solution"`
 }
 
 func (s *Problem) TableName() string {

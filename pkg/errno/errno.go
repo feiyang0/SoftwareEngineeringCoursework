@@ -44,13 +44,12 @@ var (
 
 	// ErrProblemNotFound err
 	ErrProblemNotFound = &Errno{Code: 20201, Message: "problem was not found."}
-
-	//
-	ErrTagNotFound = &Errno{Code: 20202, Message: "tag was not found."}
-
+	ErrTagNotFound     = &Errno{Code: 20202, Message: "tag was not found."}
 	// ErrProblemAlreadyExist represents the post already exist.
 	ErrProblemAlreadyExist = &Errno{Code: 20203, Message: "Post already exist."}
 	ErrProblemIdError      = &Errno{Code: 20204, Message: "pid不合法，应该为数字"}
+
+	ErrSolutionNotFound = &Errno{Code: 20301, Message: "solution was not found."}
 )
 
 // Errno defines a new error type used by goserver.

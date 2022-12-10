@@ -65,3 +65,56 @@ func TestProblems(t *testing.T) {
 	//	fmt.Println(pm)
 	//}
 }
+
+func TestSolution(t *testing.T) {
+	initDb()
+	dbIns, err := GetMySQLFactoryOr()
+	if err != nil {
+		fmt.Println("dbIns err:", err)
+	}
+	s := dbIns.Solutions()
+
+	// create solution
+	//s.Create(12, &v1.Solution{
+	//	SchoolId: 123,
+	//	Content:  "题解内容",
+	//})
+
+	// solution list
+	//opts := &v1.SolutionListOption{
+	//	Pid:    12,
+	//	Offset: 0,
+	//	Limit:  2,
+	//}
+	//ss, number, _ := s.GetSolutionList(opts)
+	//fmt.Println("total number:", number)
+	//for _, solu := range ss {
+	//	fmt.Println(solu)
+	//}
+	//
+
+	//// 修改题解
+	//solu := &v1.Solution{
+	//	SchoolId: 123,
+	//	Content:  "修改题解内容",
+	//}
+	//solu.ID = 10
+	//s.Update(solu)
+
+	////添加评论
+	//s.AddComment(1, &v1.Comment{
+	//	SchoolId: 123,
+	//	Content:  "这是评论1",
+	//})
+	//s.AddComment(1, &v1.Comment{
+	//	SchoolId: 123,
+	//	Content:  "这是评论2",
+	//})
+
+	// 删除评论
+	s.DelComment(1, 3)
+	// 获取题解
+	solution, _ := s.GetSolution(1)
+	fmt.Println(solution.Comments)
+
+}

@@ -61,10 +61,14 @@ func (p *ProblemController) GetAllWithTags(c *gin.Context) {
 	schoolId, err := strconv.ParseInt(c.GetString(constant.XUserIdKey), 10, 64)
 	uid := uint64(schoolId)
 
-	problems, err := p.problemS.GetAllWithTag(uid, &r)
+	problems, pNumber, err := p.problemS.GetAllWithTag(uid, &r)
 	if err != nil {
 		core.WriteResponse(c, err, nil)
 		return
 	}
-	core.WriteResponse(c, nil, problems)
+	data := map[string]interface{}{
+		"problemsNumber": pNumber,
+		"problems":       problems,
+	}
+	core.WriteResponse(c, nil, data)
 }

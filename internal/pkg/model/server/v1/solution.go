@@ -3,8 +3,9 @@ package v1
 // Solution 题目答案
 type Solution struct {
 	BaseModel
-	SchoolId uint64 `json:"schoolId" gorm:"column:schoolId"`
-	Content  string `json:"content" gorm:"column:content"`
+	SchoolId uint64    `json:"schoolId" gorm:"column:schoolId"`
+	Content  string    `json:"content" gorm:"column:content"`
+	Comments []Comment `json:"comments" gorm:"many2many:solution_comment"`
 }
 
 func (a *Solution) TableName() string {
@@ -12,10 +13,13 @@ func (a *Solution) TableName() string {
 }
 
 type ProblemSolution struct {
-	ProblemId  uint64 `gorm:"column:problemId"`
-	SolutionId uint64 `gorm:"column:solutionId"`
+	ProblemId  uint64 `gorm:"primary_key"`
+	SolutionId uint64 `gorm:"primary_key"`
 }
 
 func (a *ProblemSolution) TableName() string {
-	return "problemSolution"
+	return "problem_solution"
+}
+
+type UserSolution struct {
 }

@@ -16,9 +16,11 @@ func (s *StudentController) Collect(c *gin.Context) {
 	pid, err := strconv.ParseInt(c.Query("problemId"), 10, 64)
 	if err != nil {
 		core.WriteResponse(c, errno.ErrProblemIdError, nil)
+		return
 	}
 	if err = s.studentS.Collect(uint64(uid), uint64(pid)); err != nil {
 		core.WriteResponse(c, nil, err)
+		return
 	}
 	core.WriteResponse(c, errno.OK, nil)
 }
@@ -30,9 +32,11 @@ func (s *StudentController) CancelCollect(c *gin.Context) {
 	pid, err := strconv.ParseInt(c.Query("problemId"), 10, 64)
 	if err != nil {
 		core.WriteResponse(c, errno.ErrProblemIdError, nil)
+		return
 	}
 	if err = s.studentS.CancelCollect(uint64(uid), uint64(pid)); err != nil {
 		core.WriteResponse(c, nil, err)
+		return
 	}
 	core.WriteResponse(c, errno.OK, nil)
 }

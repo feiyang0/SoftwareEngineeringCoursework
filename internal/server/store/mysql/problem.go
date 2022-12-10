@@ -69,7 +69,7 @@ func (p *problems) GetAll(opts *v1.ProblemListOption) ([]*v1.Problem, error) {
 
 	return ps, nil
 }
-func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.Problem, error) {
+func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.Problem, int64, error) {
 	var ps []*v1.Problem
 	//orders := fmt.Sprintf("%s %s", opts.OrderBy, opts.SortOrder)
 	var orders string
@@ -107,7 +107,8 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 		tx.Joins("left join problem_tags on problem_tags.problem_id = problem.id").
 			Where("problem_tags.tag_name = ?", opts.Tag).Find(&ps)
 	}
-
+	var problemNumber int64
+	tx.Count(&problemNumber)
 	// 取数据
 	tx.Offset(opts.Offset).Limit(opts.Limit).Order(orders).Find(&ps)
 	// 同步题目状态
@@ -119,7 +120,7 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 		problem.Pass, problem.Favour = stuP.Pass, stuP.Favour
 	}
 
-	return ps, nil
+	return ps, problemNumber, nil
 }
 func (p *problems) GetProblem(id uint64) (*v1.Problem, error) {
 	problem := &v1.Problem{}
@@ -136,32 +137,4 @@ func (p *problems) GetProblem(id uint64) (*v1.Problem, error) {
 		}
 	}
 	return problem, nil
-}
-
-//func (u *problems) Get(problem *v1.Problem) error {
-//	user := &v1.User{}
-//	err := u.db.Where("id = ?", schoolId).First(&user).Error
-//	if err != nil {
-//		if errors.Is(err, gorm.ErrRecordNotFound) {
-//			return nil, errno.ErrUserNotFound
-//		}
-//		return nil, err
-//	}
-//	return user, nil
-//}
-
-//func (u *problems) GetByName(name string) (*v1.User, error) {
-//	user := &v1.User{}
-//	err := u.db.Where("email = ?", name).First(&user).Error
-//	if err != nil {
-//		if errors.Is(err, gorm.ErrRecordNotFound) {
-//			return nil, errno.ErrUserNotFound
-//		}
-//		return nil, err
-//	}
-//	return user, nil
-//}
-
-func (p *problems) List() ([]*v1.User, error) {
-	return nil, nil
 }

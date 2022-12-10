@@ -4,6 +4,7 @@ type Factory interface {
 	Users() UserStore
 	Problems() ProblemStore
 	Students() StudentStore
+	Solutions() SolutionStore
 	Close() error
 }
 

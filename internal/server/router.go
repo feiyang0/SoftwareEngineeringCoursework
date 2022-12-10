@@ -5,6 +5,7 @@ import (
 	"SoftwareEngine/internal/pkg/constant"
 	"SoftwareEngine/internal/pkg/middleware"
 	"SoftwareEngine/internal/server/controller/v1/problem"
+	"SoftwareEngine/internal/server/controller/v1/solution"
 	"SoftwareEngine/internal/server/controller/v1/student"
 	"SoftwareEngine/internal/server/controller/v1/user"
 	"SoftwareEngine/internal/server/store/mysql"
@@ -70,7 +71,8 @@ func installController(g *gin.Engine) {
 		g.PUT("/resetPasswd", userController.SetNewPasswd)
 
 		u := g.Group("user", authMiddleware("2"))
-		u.GET("/info", userController.Get)
+		u.GET("info", userController.Get)
+		u.GET(":userId", userController.GetById)
 	}
 	v1 := g.Group("/v1")
 
@@ -95,16 +97,27 @@ func installController(g *gin.Engine) {
 		}
 
 		// 题目修改,添加,删除
-		teacherH := v1.Group("/problem", authMiddleware("1"))
+		teacherG := v1.Group("/problem", authMiddleware("1"))
 		{
-			teacherH.POST("create", problemH.Create)
-			teacherH.PUT(":problemId", problemH.Update)
-			teacherH.DELETE(":problemId", problemH.Delete)
+			teacherG.POST("create", problemH.Create)
+			teacherG.PUT(":problemId", problemH.Update)
+			teacherG.DELETE(":problemId", problemH.Delete)
 		}
-	}
-	// 评论区模块
-	{
 
+		// 题解评论
+		solutionG := p.Group(":problemId/solution", authMiddleware("2"))
+		{
+			solutionH := solution.NewSolutionController(storeIns)
+			solutionG.POST("", solutionH.Create)
+			solutionG.GET(":solutionId", solutionH.Get)
+			solutionG.DELETE(":solutionId", solutionH.Delete)
+			solutionG.PUT(":solutionId", solutionH.Update)
+			solutionG.POST("all", solutionH.List)
+
+			commentG := solutionG.Group(":solutionId/comment", authMiddleware("2"))
+			commentG.POST("", solutionH.AddComment)
+			commentG.DELETE(":commentId", solutionH.DeleteComment)
+		}
 	}
 
 	// 班级模块

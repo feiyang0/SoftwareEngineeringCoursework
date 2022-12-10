@@ -2,7 +2,6 @@ package mysql
 
 import (
 	"fmt"
-	"log"
 	"sync"
 
 	"github.com/spf13/viper"
@@ -28,6 +27,10 @@ func (ds *datastore) Problems() store.ProblemStore {
 
 func (ds *datastore) Students() store.StudentStore {
 	return newStudents(ds)
+}
+
+func (ds *datastore) Solutions() store.SolutionStore {
+	return newSolutions(ds)
 }
 
 //func (ds *datastore) Teachers() store.TeacherStore {
@@ -77,9 +80,9 @@ func GetMySQLFactoryOr() (store.Factory, error) {
 
 		// uncomment the following line if you need auto migration the given models
 		// not suggested in production environment.
-		if err = migrateDatabase(dbIns); err != nil {
-			log.Fatalln("migrateDatabase:", err)
-		}
+		//if err = migrateDatabase(dbIns); err != nil {
+		//	log.Fatalln("migrateDatabase:", err)
+		//}
 
 		mysqlFactory = &datastore{dbIns}
 	})
@@ -119,6 +122,13 @@ func migrateDatabase(db *gorm.DB) error {
 	}
 
 	if err := db.AutoMigrate(&v1.StudentProblem{}); err != nil {
+		return err
+	}
+	// 题解
+	if err := db.AutoMigrate(&v1.Comment{}, &v1.Solution{}); err != nil {
+		return err
+	}
+	if err := db.AutoMigrate(&v1.ProblemSolution{}, &v1.SolutionComment{}); err != nil {
 		return err
 	}
 	//if err := db.SetupJoinTable(&v1.User{}, "Problems", &v1.StudentProblem{}); err != nil {

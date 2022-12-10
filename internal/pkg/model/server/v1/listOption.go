@@ -19,3 +19,9 @@ type Order struct {
 	OrderBy   string `json:"orderBy"`
 	SortOrder string `json:"sortOrder"`
 }
+
+type SolutionListOption struct {
+	Pid    uint64
+	Offset int `json:"offset"`
+	Limit  int `json:"limit"`
+}

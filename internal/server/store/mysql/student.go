@@ -2,6 +2,8 @@ package mysql
 
 import (
 	v1 "SoftwareEngine/internal/pkg/model/server/v1"
+	"SoftwareEngine/pkg/errno"
+	"errors"
 	"gorm.io/gorm"
 )
 
@@ -17,6 +19,17 @@ func (s *students) Get(uid, pid uint64) (*v1.StudentProblem, error) {
 	err := s.db.Where("user_id = ? and problem_id = ?", uid, pid).First(&sp).Error
 	return sp, err
 }
+
+func (s *students) checkP(id uint64) error {
+	problem := &v1.Problem{}
+	err := s.db.Where("id = ?", id).First(&problem).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return errno.ErrProblemNotFound
+		}
+	}
+	return nil
+}
 func (s *students) calCnt(pid uint64, num int) {
 	problem := &v1.Problem{}
 	s.db.Where("id = ?", pid).First(&problem)
@@ -24,6 +37,9 @@ func (s *students) calCnt(pid uint64, num int) {
 	s.db.Save(&problem)
 }
 func (s *students) Commit(uid, pid uint64) error {
+	if err := s.checkP(pid); err != nil {
+		return err
+	}
 	sp, err := s.Get(uid, pid)
 	if err != nil {
 		sp = &v1.StudentProblem{
@@ -39,6 +55,9 @@ func (s *students) Commit(uid, pid uint64) error {
 }
 
 func (s *students) CancelCommit(uid, pid uint64) error {
+	if err := s.checkP(pid); err != nil {
+		return err
+	}
 	sp, err := s.Get(uid, pid)
 	if err != nil {
 		return err
@@ -49,6 +68,9 @@ func (s *students) CancelCommit(uid, pid uint64) error {
 }
 
 func (s *students) Collect(uid, pid uint64) error {
+	if err := s.checkP(pid); err != nil {
+		return err
+	}
 	sp, err := s.Get(uid, pid)
 	if err != nil {
 		sp = &v1.StudentProblem{
@@ -63,6 +85,9 @@ func (s *students) Collect(uid, pid uint64) error {
 }
 
 func (s *students) CancelCollect(uid, pid uint64) error {
+	if err := s.checkP(pid); err != nil {
+		return err
+	}
 	sp, err := s.Get(uid, pid)
 	if err != nil {
 		return err
