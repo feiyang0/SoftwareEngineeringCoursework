@@ -5,10 +5,10 @@ import "github.com/go-playground/validator/v10"
 // Comment  ans下的讨论，一个答案多个讨论
 type Comment struct {
 	BaseModel
-	SchoolId uint64 `json:"schoolId" gorm:"column:schoolId"`
-	Content  string `json:"content" gorm:"column:content"`
-	Status   bool   `json:"status" gorm:"column:status"`
-	ReplyId  uint64 `json:"reply" gorm:"column:reply"`
+	SchoolId       uint64 `json:"schoolId" gorm:"column:schoolId"`
+	Content        string `json:"content" gorm:"column:content"`
+	Status         bool   `json:"status" gorm:"column:status"`
+	ReplyCommentId uint64 `json:"replyCommentId" gorm:"column:reply_comment_id"`
 }
 
 func (c *Comment) TableName() string {

@@ -9,6 +9,7 @@ type Problem struct {
 	Category   string `json:"category,omitempty" gorm:"column:category;size:256"`
 	Title      string `json:"title" gorm:"column:title;size:256;not null;unique"`
 	Question   string `json:"question" gorm:"column:question"`
+	Ans        string `json:"ans" gorm:"column:ans"`
 	Cnt        int    `gorm:"column:cnt"`
 	Difficulty int8   `json:"difficulty" gorm:"column:difficulty"`
 	Tags       []Tag  `json:"tags" gorm:"many2many:problem_tags;"`
