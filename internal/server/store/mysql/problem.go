@@ -29,9 +29,24 @@ func (p *problems) Create(problem *v1.Problem) error {
 	}
 	return nil
 }
-
+func (p *problems) getProblem(id uint64) (*v1.Problem, error) {
+	problem := &v1.Problem{}
+	err := p.db.Where("id = ?", id).First(&problem).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errno.ErrProblemNotFound
+		}
+	}
+	err = p.db.Model(&problem).Association("Tags").Find(&problem.Tags)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errno.ErrProblemNotFound
+		}
+	}
+	return problem, nil
+}
 func (p *problems) Update(problem *v1.Problem) error {
-	tempP, _ := p.GetProblem(problem.ID)
+	tempP, _ := p.getProblem(problem.ID)
 
 	pt := &v1.ProblemTag{}
 	p.db.Where("problem_id = ?", problem.ID).Delete(&pt)
@@ -122,9 +137,9 @@ func (p *problems) GetAllWithTag(uid uint64, opts *v1.ProblemListOption) ([]*v1.
 
 	return ps, problemNumber, nil
 }
-func (p *problems) GetProblem(id uint64) (*v1.Problem, error) {
+func (p *problems) GetProblem(uid, pid uint64) (*v1.Problem, error) {
 	problem := &v1.Problem{}
-	err := p.db.Where("id = ?", id).First(&problem).Error
+	err := p.db.Where("id = ?", pid).First(&problem).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errno.ErrProblemNotFound
@@ -136,5 +151,9 @@ func (p *problems) GetProblem(id uint64) (*v1.Problem, error) {
 			return nil, errno.ErrProblemNotFound
 		}
 	}
+	sp := &v1.StudentProblem{}
+	p.db.Where("user_id = ? and problem_id = ?", uid, pid).First(&sp)
+	problem.Pass = sp.Pass
+	problem.Favour = sp.Favour
 	return problem, nil
 }
