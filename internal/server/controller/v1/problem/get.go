@@ -40,9 +40,8 @@ func (p *ProblemController) GetProblem(c *gin.Context) {
 	log.L(c).Info("problem get problem function called.")
 
 	schoolId, err := strconv.ParseInt(c.GetString(constant.XUserIdKey), 10, 64)
-	uid := uint64(schoolId)
 	pid, _ := strconv.ParseInt(c.Param("problemId"), 10, 64)
-	problem, err := p.problemS.GetProblem(uint64(uid), uint64(pid))
+	problem, err := p.problemS.GetProblem(uint64(schoolId), uint64(pid))
 	if err != nil {
 		core.WriteResponse(c, err, nil)
 		return
